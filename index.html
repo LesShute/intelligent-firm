@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Intelligent Firm — AI for Defense Litigation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #142038;
+    --navy-light: #1c2d4a;
+    --gold: #c9a227;
+    --gold-light: #e8c84a;
+    --gold-dim: rgba(201,162,39,0.15);
+    --red-soft: #c0392b;
+    --green: #27ae60;
+    --text: #e8e8ec;
+    --text-dim: rgba(232,232,236,0.6);
+    --text-body: #c8c8d0;
+    --card-bg: rgba(255,255,255,0.04);
+    --card-border: rgba(255,255,255,0.08);
+    --section-gap: 120px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAVIGATION ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,22,40,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 16px 48px; display: flex; justify-content: space-between; align-items: center;
+    transition: transform 0.3s;
+  }
+  nav .logo { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  nav .nav-links { display: flex; gap: 24px; }
+  nav .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+  nav .nav-links a:hover { color: var(--gold); }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 0 48px; max-width: 1100px; margin: 0 auto; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding-top: 80px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at 50% 30%, rgba(201,162,39,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block; padding: 8px 20px; border: 1px solid var(--gold);
+    border-radius: 100px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 32px; font-weight: 600;
+    animation: fadeUp 0.8s ease-out;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(36px, 6vw, 64px); font-weight: 700; line-height: 1.15;
+    max-width: 800px; margin-bottom: 24px;
+    animation: fadeUp 0.8s ease-out 0.1s both;
+  }
+  .hero h1 .gold { color: var(--gold); }
+  .hero .subtitle {
+    font-size: clamp(16px, 2vw, 20px); color: var(--text-dim);
+    max-width: 560px; line-height: 1.6; margin-bottom: 48px;
+    animation: fadeUp 0.8s ease-out 0.2s both;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--gold); color: var(--navy); padding: 16px 36px;
+    border-radius: 8px; font-weight: 700; font-size: 15px; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: fadeUp 0.8s ease-out 0.3s both;
+  }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,162,39,0.3); }
+  .scroll-hint {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    animation: bounce 2s infinite; color: var(--text-dim); font-size: 13px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .scroll-hint .arrow { font-size: 20px; }
+
+  /* ===== SECTION HEADERS ===== */
+  .section-tag {
+    display: inline-block; padding: 6px 16px; border: 1px solid var(--gold);
+    border-radius: 100px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px; font-weight: 600;
+  }
+  .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 4vw, 44px); font-weight: 700;
+    line-height: 1.2; margin-bottom: 16px;
+  }
+  .section-subtitle { font-size: 17px; color: var(--text-dim); max-width: 600px; line-height: 1.6; margin-bottom: 48px; }
+
+  /* ===== VERSUS TABLE ===== */
+  .versus-section { padding-top: var(--section-gap); padding-bottom: var(--section-gap); }
+  .versus-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 32px 0; border-radius: 12px; overflow: hidden; }
+  .versus-table th { padding: 16px 20px; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+  .versus-table th:first-child { background: var(--navy-mid); text-align: left; }
+  .versus-table th:nth-child(2) { background: var(--red-soft); color: white; text-align: center; }
+  .versus-table th:nth-child(3) { background: rgba(255,255,255,0.05); color: var(--text-dim); text-align: center; }
+  .versus-table td { padding: 14px 20px; border-bottom: 1px solid var(--card-border); font-size: 14px; }
+  .versus-table td:first-child { font-weight: 600; color: var(--text); background: var(--card-bg); }
+  .versus-table td:nth-child(2) { color: var(--red-soft); font-weight: 500; text-align: center; background: rgba(192,57,43,0.05); }
+  .versus-table td:nth-child(3) { color: var(--text-dim); text-align: center; }
+  .versus-table tr:last-child td { border-bottom: none; }
+
+  /* ===== QUOTE ===== */
+  .quote-block {
+    border-left: 3px solid var(--gold); padding: 28px 32px; margin: 48px 0;
+    background: var(--gold-dim); border-radius: 0 12px 12px 0;
+  }
+  .quote-block p {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px; font-style: italic; line-height: 1.6; color: var(--text);
+  }
+  .quote-block .attr { font-family: 'Inter', sans-serif; font-style: normal; font-size: 12px; color: var(--text-dim); margin-top: 12px; }
+
+  /* ===== VALUE SECTION ===== */
+  .value-section { padding-top: var(--section-gap); }
+  .value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+  .value-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 32px; transition: transform 0.2s, border-color 0.2s;
+  }
+  .value-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .value-card .icon { font-size: 28px; margin-bottom: 16px; }
+  .value-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  .value-card p { font-size: 14px; color: var(--text-body); line-height: 1.6; }
+
+  /* ===== ARCHITECTURE ===== */
+  .arch-section { padding-top: var(--section-gap); }
+  .arch-visual {
+    background: var(--navy-mid); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 48px; margin-top: 32px; position: relative; overflow: hidden;
+  }
+  .arch-visual::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .arch-layer {
+    text-align: center; padding: 24px; border: 1px solid var(--card-border);
+    border-radius: 12px; margin-bottom: 24px; position: relative;
+  }
+  .arch-layer.firm { background: rgba(201,162,39,0.08); border-color: rgba(201,162,39,0.3); }
+  .arch-layer .layer-label {
+    position: absolute; top: -10px; left: 24px; background: var(--navy-mid);
+    padding: 0 12px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--gold); font-weight: 600;
+  }
+  .arch-layer .layer-items {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px;
+  }
+  .arch-layer .layer-items span {
+    background: rgba(255,255,255,0.06); padding: 6px 14px; border-radius: 6px;
+    font-size: 12px; color: var(--text-body); font-weight: 500;
+  }
+  .arch-connector { text-align: center; color: var(--gold); font-size: 24px; margin: -8px 0; }
+  .arch-attorneys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .arch-atty {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 10px; padding: 20px; text-align: center;
+  }
+  .arch-atty .name { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  .arch-atty .details { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+  .arch-atty-more {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--text-dim); font-weight: 500;
+  }
+
+  /* ===== INTELLIGENCE ===== */
+  .intel-section { padding-top: var(--section-gap); }
+  .intel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+  .intel-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 28px; position: relative; overflow: hidden;
+  }
+  .intel-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .intel-card.full { grid-column: 1 / -1; }
+  .intel-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .intel-card p { font-size: 14px; color: var(--text-body); line-height: 1.6; }
+
+  /* ===== COMPOUNDING ===== */
+  .compound-section { padding-top: var(--section-gap); }
+  .timeline { position: relative; margin: 48px 0; padding-left: 32px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(to bottom, var(--gold), var(--navy-light));
+  }
+  .timeline-item { position: relative; margin-bottom: 40px; padding-left: 32px; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -28px; top: 6px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--gold); border: 3px solid var(--navy);
+  }
+  .timeline-item .time { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+  .timeline-item h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .timeline-item p { font-size: 14px; color: var(--text-dim); }
+  .timeline-item .competitor { font-size: 12px; color: rgba(192,57,43,0.7); margin-top: 4px; font-style: italic; }
+
+  /* ===== HUMAN ===== */
+  .human-section { padding-top: var(--section-gap); }
+  .human-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+  .human-card {
+    background: rgba(39,174,96,0.06); border: 1px solid rgba(39,174,96,0.15);
+    border-radius: 16px; padding: 28px;
+  }
+  .human-card .transformation { font-size: 13px; color: var(--green); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .human-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .human-card p { font-size: 14px; color: var(--text-body); line-height: 1.6; }
+  .human-card.full { grid-column: 1 / -1; }
+
+  /* ===== FINANCIALS ===== */
+  .finance-section { padding-top: var(--section-gap); }
+  .finance-highlight {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 32px 0;
+  }
+  .finance-stat {
+    background: var(--gold-dim); border: 1px solid rgba(201,162,39,0.2);
+    border-radius: 16px; padding: 28px; text-align: center;
+  }
+  .finance-stat .label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+  .finance-stat .value { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--text); }
+  .finance-stat .sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+
+  .pricing-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; margin: 32px 0; }
+  .pricing-table th { background: var(--navy-light); padding: 14px 20px; font-size: 13px; font-weight: 600; text-align: center; letter-spacing: 0.5px; }
+  .pricing-table th:first-child { text-align: left; }
+  .pricing-table td { padding: 14px 20px; border-bottom: 1px solid var(--card-border); text-align: center; font-size: 15px; }
+  .pricing-table td:first-child { text-align: left; font-weight: 600; }
+  .pricing-table .highlight-col { background: rgba(201,162,39,0.06); }
+
+  .offset-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; margin: 24px 0; }
+  .offset-table th { background: var(--navy-light); padding: 12px 16px; font-size: 12px; font-weight: 600; text-align: left; letter-spacing: 0.5px; }
+  .offset-table td { padding: 12px 16px; border-bottom: 1px solid var(--card-border); font-size: 13px; color: var(--text-body); }
+
+  .net-cost-card {
+    background: linear-gradient(135deg, rgba(39,174,96,0.1), rgba(201,162,39,0.1));
+    border: 1px solid rgba(39,174,96,0.3); border-radius: 16px;
+    padding: 32px; text-align: center; margin: 32px 0;
+  }
+  .net-cost-card .headline { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: var(--green); margin-bottom: 8px; }
+  .net-cost-card p { font-size: 15px; color: var(--text-body); }
+
+  /* ===== SECURITY ===== */
+  .security-section { padding-top: var(--section-gap); }
+  .badge-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 24px 0; }
+  .badge {
+    padding: 8px 18px; border-radius: 100px; font-size: 12px;
+    font-weight: 600; letter-spacing: 0.5px;
+  }
+  .badge.outline { border: 1px solid var(--gold); color: var(--gold); }
+  .badge.filled { background: var(--gold); color: var(--navy); }
+  .badge.green-fill { background: var(--green); color: white; }
+
+  .security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+  .security-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 10px; padding: 16px;
+  }
+  .security-item .check { color: var(--green); font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .security-item .label { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .security-item .desc { font-size: 12px; color: var(--text-dim); }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    padding-top: var(--section-gap); padding-bottom: var(--section-gap);
+  }
+  .cta-box {
+    background: linear-gradient(135deg, var(--navy-mid), var(--navy-light));
+    border: 1px solid var(--card-border); border-radius: 24px;
+    padding: 64px; text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-box::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,162,39,0.08), transparent 70%);
+  }
+  .cta-box h2 {
+    font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .cta-box .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 40px 0; text-align: center; }
+  .cta-step { position: relative; }
+  .cta-step .num {
+    width: 40px; height: 40px; border-radius: 50%; background: var(--gold);
+    color: var(--navy); font-weight: 800; font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 12px;
+  }
+  .cta-step h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .cta-step p { font-size: 12px; color: var(--text-dim); }
+  .cta-contact { margin-top: 40px; }
+  .cta-contact a {
+    color: var(--gold); text-decoration: none; font-size: 17px; font-weight: 600;
+  }
+  .cta-tagline {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 20px; color: var(--text-dim); margin-top: 32px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center; padding: 32px 48px; font-size: 11px;
+    color: var(--text-dim); border-top: 1px solid var(--card-border);
+  }
+
+  /* ===== WHY KAIROS ===== */
+  .why-section { padding-top: var(--section-gap); }
+  .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 32px; }
+  .why-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 28px; text-align: center;
+    transition: border-color 0.2s;
+  }
+  .why-card:hover { border-color: var(--gold); }
+  .why-card .icon { font-size: 32px; margin-bottom: 16px; }
+  .why-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .why-card p { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    section { padding: 0 24px; }
+    nav { padding: 12px 24px; }
+    nav .nav-links { display: none; }
+    .value-grid, .intel-grid, .human-grid, .security-grid { grid-template-columns: 1fr; }
+    .finance-highlight { grid-template-columns: 1fr 1fr; }
+    .arch-attorneys { grid-template-columns: 1fr; }
+    .cta-box .steps-grid { grid-template-columns: 1fr 1fr; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .cta-box { padding: 40px 24px; }
+  }
+
+  @media print {
+    nav { display: none; }
+    .hero { min-height: auto; padding: 60px 0; }
+    section { padding: 40px 0; }
+    :root { --section-gap: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">The Intelligent Firm</div>
+  <div class="nav-links">
+    <a href="#battlefield">The Battlefield</a>
+    <a href="#value">The Value</a>
+    <a href="#intelligence">Firm Intelligence</a>
+    <a href="#investment">Investment</a>
+    <a href="#security">Security</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">For Defense Litigation Firms</div>
+  <h1>Are You Taking a Knife to a <span class="gold">Gunfight?</span></h1>
+  <div class="subtitle">The plaintiff bar has AI. They know more about how you litigate than you do. It's time to level the playing field.</div>
+  <a href="#battlefield" class="hero-cta">See What You're Up Against ↓</a>
+  <div class="scroll-hint">
+    <span>Scroll to explore</span>
+    <span class="arrow">↓</span>
+  </div>
+</section>
+
+<!-- ASYMMETRIC BATTLEFIELD -->
+<section class="versus-section" id="battlefield">
+  <div class="reveal">
+    <span class="section-tag">The Problem</span>
+    <div class="section-title">The Asymmetric Battlefield</div>
+    <div class="section-subtitle">Plaintiff attorneys aren't experimenting with AI anymore. They're deploying it — aggressively and effectively. And they're not telling you about it.</div>
+  </div>
+
+  <div class="reveal">
+    <table class="versus-table">
+      <tr><th>Capability</th><th>Plaintiff (with AI)</th><th>Defense (without AI)</th></tr>
+      <tr><td>Case Valuation</td><td>AI-modeled from thousands of outcomes</td><td>Manual estimate</td></tr>
+      <tr><td>Litigation Strategy</td><td>Game theory optimized, scenario-simulated</td><td>Experience + instinct</td></tr>
+      <tr><td>Opposing Counsel Profiling</td><td>Automated — patterns, tendencies, win rates</td><td>None</td></tr>
+      <tr><td>Discovery</td><td>AI-targeted to maximize defense burden</td><td>Manual drafting</td></tr>
+      <tr><td>Deposition Prep</td><td>Cross-references testimony nationally</td><td>Local knowledge only</td></tr>
+      <tr><td>Mediation</td><td>Real-time simulation + concession optimization</td><td>Notepad and instinct</td></tr>
+      <tr><td>Brief Drafting</td><td>AI-assisted, hours</td><td>Manual, days</td></tr>
+      <tr><td>Research</td><td>AI-curated, minutes</td><td>Westlaw, hours</td></tr>
+    </table>
+  </div>
+
+  <div class="quote-block reveal">
+    <p>Right now, there's a plaintiff attorney running a litigation simulation against your case strategy, profiling your tendencies, and optimizing their demand based on your historical settlement patterns.</p>
+  </div>
+</section>
+
+<!-- VALUE PROPOSITION -->
+<section class="value-section" id="value">
+  <div class="reveal">
+    <span class="section-tag">The Value</span>
+    <div class="section-title">Win More. Deliver Better.<br>Never Lose a Client.</div>
+    <div class="section-subtitle">This isn't about reducing billable hours. It's about growing your practice and becoming the firm payers can't afford to lose.</div>
+  </div>
+
+  <div class="value-grid reveal">
+    <div class="value-card">
+      <div class="icon">🎯</div>
+      <h3>Win More Referrals</h3>
+      <p>The attorney who responds with a case strategy memo in 2 hours instead of 2 days wins the next referral. AI doesn't reduce your hours — it makes you the attorney payers want to send work to.</p>
+    </div>
+    <div class="value-card">
+      <div class="icon">⚖️</div>
+      <h3>Deliver Superior Outcomes</h3>
+      <p>AI surfaces case precedents that shift trial outcomes. The attorney who saves a payer $500K on a verdict becomes their first call on the next complex case. Better results = more business.</p>
+    </div>
+    <div class="value-card">
+      <div class="icon">📈</div>
+      <h3>Elevate Every Hour</h3>
+      <p>AI handles research groundwork. You bill for strategic analysis and client advisory. Same hours — dramatically higher value per hour. You're billing for thinking, not typing.</p>
+    </div>
+    <div class="value-card">
+      <div class="icon">🛡️</div>
+      <h3>Protect Your Panel Position</h3>
+      <p>The firm with AI-generated analytics and proactive reporting wins the panel review over the firm submitting static spreadsheets. Your hours become irreplaceable.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="arch-section">
+  <div class="reveal">
+    <span class="section-tag">The Platform</span>
+    <div class="section-title">Personal AI Partners.<br>Collective Firm Intelligence.</div>
+    <div class="section-subtitle">Every attorney gets an isolated AI partner. The firm gets the combined intelligence of all of them working together.</div>
+  </div>
+
+  <div class="arch-visual reveal">
+    <div class="arch-layer firm">
+      <span class="layer-label">Firm Intelligence Layer</span>
+      <div class="arch-layer layer-items" style="border: none; padding: 12px 0; margin: 0;">
+        <span>Cross-Case Patterns</span>
+        <span>Judge Intelligence</span>
+        <span>Opposing Counsel</span>
+        <span>Payer Analytics</span>
+        <span>Templates</span>
+        <span>Ethical Walls</span>
+        <span>Quality Metrics</span>
+      </div>
+    </div>
+    <div class="arch-connector">▼</div>
+    <div class="arch-attorneys">
+      <div class="arch-atty">
+        <div class="name">Attorney A</div>
+        <div class="details">Cases · Memory · Style<br><em>Fully Isolated</em></div>
+      </div>
+      <div class="arch-atty">
+        <div class="name">Attorney B</div>
+        <div class="details">Cases · Memory · Style<br><em>Fully Isolated</em></div>
+      </div>
+      <div class="arch-atty">
+        <div class="name">Attorney C</div>
+        <div class="details">Cases · Memory · Style<br><em>Fully Isolated</em></div>
+      </div>
+    </div>
+    <div class="arch-atty-more" style="margin-top: 16px;">× Your entire firm</div>
+  </div>
+</section>
+
+<!-- COLLECTIVE INTELLIGENCE -->
+<section class="intel-section" id="intelligence">
+  <div class="reveal">
+    <span class="section-tag">The Advantage</span>
+    <div class="section-title">Your Firm's Competitive Brain</div>
+    <div class="section-subtitle">You're not buying assistants. You're building an intelligence engine that compounds every month.</div>
+  </div>
+
+  <div class="intel-grid reveal">
+    <div class="intel-card">
+      <h3>🧠 Institutional Knowledge</h3>
+      <p>When a senior partner retires, their decades of wisdom stay. Every brief, every strategy, every lesson — captured permanently. Your firm's intelligence becomes an asset, not a liability walking out the door.</p>
+    </div>
+    <div class="intel-card">
+      <h3>🔗 Cross-Case Recognition</h3>
+      <p>Attorney A's TBI defense in Orlando connects to Attorney B's winning causation argument in Tampa. The system surfaces insights no individual attorney could find alone.</p>
+    </div>
+    <div class="intel-card">
+      <h3>👨‍⚖️ Judge & Venue Intelligence</h3>
+      <p>Structured intelligence on every judge across every attorney's combined appearances. Ruling tendencies, motion preferences, expert witness dispositions. Collective knowledge, individual advantage.</p>
+    </div>
+    <div class="intel-card">
+      <h3>🎭 Opposing Counsel Profiles</h3>
+      <p>Settlement patterns, bluff tendencies, preferred strategies — built from hundreds of cases across your entire firm. The same profiling plaintiff AI does on you, turned around.</p>
+    </div>
+    <div class="intel-card">
+      <h3>📊 Payer Analytics</h3>
+      <p>Real-time dashboards for insurance clients — case resolution, cost trends, outcome predictions. Generated automatically. The reason a payer never leaves your firm for a competitor.</p>
+    </div>
+    <div class="intel-card">
+      <h3>📋 Operational Visibility</h3>
+      <p>Deadline compliance, caseload distribution, quality metrics, business development activity. Not surveillance — the operational awareness every other industry has had for decades.</p>
+    </div>
+  </div>
+
+  <div class="quote-block reveal">
+    <p>The firm that builds this first in your market owns an advantage that money can't buy later. Intelligence compounds. Every month you wait, that advantage goes to someone else.</p>
+  </div>
+</section>
+
+<!-- COMPOUNDING -->
+<section class="compound-section">
+  <div class="reveal">
+    <span class="section-tag">The Timeline</span>
+    <div class="section-title">Intelligence Compounds</div>
+    <div class="section-subtitle">Starting now matters more than starting perfectly.</div>
+  </div>
+
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="time">Month 3</div>
+      <h4>Foundation Set</h4>
+      <p>Attorneys proficient. Firm templates loaded. Individual styles learned.</p>
+      <div class="competitor">↳ Your competitor: still evaluating vendors</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Month 6</div>
+      <h4>Intelligence Emerging</h4>
+      <p>Cross-case patterns active. Judge intelligence building. Payer analytics live.</p>
+      <div class="competitor">↳ Your competitor: just starting deployment</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Month 12</div>
+      <h4>Competitive Advantage</h4>
+      <p>Full institutional brain. Opposing counsel profiles robust. Payers see the difference.</p>
+      <div class="competitor">↳ Your competitor: where you were 6 months ago</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Month 24</div>
+      <h4>Competitive Moat</h4>
+      <p>Firm intelligence is an asset. Payers prefer you. Talent chooses you. Unreachable lead.</p>
+      <div class="competitor">↳ Your competitor: still trying to catch up</div>
+    </div>
+  </div>
+</section>
+
+<!-- HUMAN IMPACT -->
+<section class="human-section">
+  <div class="reveal">
+    <span class="section-tag">Your People</span>
+    <div class="section-title">The Human Impact</div>
+    <div class="section-subtitle">Beyond the business case — what this means for every attorney in your firm.</div>
+  </div>
+
+  <div class="human-grid reveal">
+    <div class="human-card">
+      <div class="transformation">Fear → Mastery</div>
+      <h3>Own the Tool</h3>
+      <p>Every attorney is uneasy about AI. Giving them their OWN — one they control, one that learns their style — transforms anxiety into confidence.</p>
+    </div>
+    <div class="human-card">
+      <div class="transformation">Scrambling → Focused</div>
+      <h3>Practice Law Again</h3>
+      <p>Administrative tasks and research busywork get redirected to strategy, client relationships, and the practice of law they went to school for.</p>
+    </div>
+    <div class="human-card">
+      <div class="transformation">Isolated → Supported</div>
+      <h3>Safety Net</h3>
+      <p>Junior associates gain confidence with deadline tracking and citation checking. Senior attorneys gain a thinking partner. Everyone stops worrying about what they might be missing.</p>
+    </div>
+    <div class="human-card">
+      <div class="transformation">Attrition → Loyalty</div>
+      <h3>Invest in People</h3>
+      <p>People stay at firms that invest in making their work better. Deploy this and send a signal: we value our people enough to arm them with the best.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCIAL -->
+<section class="finance-section" id="investment">
+  <div class="reveal">
+    <span class="section-tag">The Investment</span>
+    <div class="section-title">Straightforward Pricing.<br>Dramatic Returns.</div>
+  </div>
+
+  <div class="finance-highlight reveal">
+    <div class="finance-stat">
+      <div class="label">Per Attorney</div>
+      <div class="value">$350</div>
+      <div class="sub">per month</div>
+    </div>
+    <div class="finance-stat">
+      <div class="label">20 Attorneys</div>
+      <div class="value">$7K</div>
+      <div class="sub">per month</div>
+    </div>
+    <div class="finance-stat">
+      <div class="label">50 Attorneys</div>
+      <div class="value">$17.5K</div>
+      <div class="sub">per month</div>
+    </div>
+    <div class="finance-stat">
+      <div class="label">100 Attorneys</div>
+      <div class="value">$35K</div>
+      <div class="sub">per month</div>
+    </div>
+  </div>
+
+  <p style="text-align: center; font-size: 13px; color: var(--text-dim); margin-bottom: 48px;">One-time setup: $10,000–$15,000 &nbsp;|&nbsp; Volume pricing available for 50+ attorneys</p>
+
+  <div class="reveal">
+    <h3 style="margin-bottom: 16px;">Cost Offset Opportunities</h3>
+    <p style="color: var(--text-body); margin-bottom: 16px;">Your firm already pays for tools an AI assistant partially or fully replaces. We identify specific offsets during the firm assessment.</p>
+
+    <table class="offset-table">
+      <tr><th>Current Expense</th><th>Potential Action</th><th>Typical Savings</th></tr>
+      <tr><td>LexisNexis / Westlaw</td><td>Reduce license tier or seat count</td><td>$200–$400/attorney/mo</td></tr>
+      <tr><td>Adobe Acrobat Pro</td><td>Eliminate or reduce licenses</td><td>$20–$30/attorney/mo</td></tr>
+      <tr><td>Document Automation</td><td>Replace with AI-assisted drafting</td><td>$50–$150/attorney/mo</td></tr>
+      <tr><td>Transcription Services</td><td>Replace with AI summarization</td><td>Varies by volume</td></tr>
+      <tr><td>Supplemental Research</td><td>Reduce or eliminate</td><td>Varies by firm</td></tr>
+      <tr><td>Paralegal Overtime</td><td>Reduce with AI-assisted prep</td><td>Varies by firm</td></tr>
+    </table>
+
+    <div class="net-cost-card">
+      <div class="headline">Estimated Net Cost: $0 – $200/mo per attorney</div>
+      <p>AI Assistant ($350/mo) minus identified offsets ($150–$400/mo).<br>Specific savings identified during complimentary firm assessment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section class="security-section" id="security">
+  <div class="reveal">
+    <span class="section-tag">Security & Privilege</span>
+    <div class="section-title">Attorney-Client Privilege.<br>Preserved by Architecture.</div>
+    <div class="section-subtitle">This is not a cloud service. No client data touches the internet. Your infrastructure. Your control. Your privilege.</div>
+  </div>
+
+  <div class="badge-row reveal">
+    <span class="badge outline">Self-Hosted</span>
+    <span class="badge outline">Zero Internet Exposure</span>
+    <span class="badge outline">Full Disk Encryption</span>
+    <span class="badge green-fill">AIGP Governed</span>
+    <span class="badge filled">94–99% Security Score</span>
+  </div>
+
+  <div class="security-grid reveal">
+    <div class="security-item">
+      <div class="check">✓</div>
+      <div><div class="label">Self-Hosted</div><div class="desc">Runs on your firm's hardware. Localhost-only. Zero public exposure.</div></div>
+    </div>
+    <div class="security-item">
+      <div class="check">✓</div>
+      <div><div class="label">Full Encryption</div><div class="desc">BitLocker/TPM disk encryption. Encrypted backups. No plaintext anywhere.</div></div>
+    </div>
+    <div class="security-item">
+      <div class="check">✓</div>
+      <div><div class="label">Zero-Trust Network</div><div class="desc">Allowlist-only egress firewall. Nothing leaves without explicit permission.</div></div>
+    </div>
+    <div class="security-item">
+      <div class="check">✓</div>
+      <div><div class="label">Ethical Walls</div><div class="desc">Per-attorney isolation. No cross-matter access. Enforced by architecture.</div></div>
+    </div>
+    <div class="security-item">
+      <div class="check">✓</div>
+      <div><div class="label">AIGP Governance</div><div class="desc">Deployed by certified AI Governance Professional. Formal incident response.</div></div>
+    </div>
+    <div class="security-item">
+      <div class="check">✓</div>
+      <div><div class="label">Automated Audits</div><div class="desc">Weekly security scans. 90-day immutable logs. Continuous compliance.</div></div>
+    </div>
+  </div>
+
+  <div class="quote-block reveal">
+    <p>Operating at the level that Palo Alto Networks, Cisco, and Trend Micro were warning organizations to reach in 2026. Top 3–5% of all deployed AI agent systems globally.</p>
+    <div class="attr">— Independent security assessment, February 2026</div>
+  </div>
+</section>
+
+<!-- WHY KAIROS -->
+<section class="why-section">
+  <div class="reveal">
+    <span class="section-tag">About Us</span>
+    <div class="section-title">We Built This for Ourselves First</div>
+  </div>
+
+  <div class="why-grid reveal">
+    <div class="why-card">
+      <div class="icon">⚡</div>
+      <h4>Decades in Your Industry</h4>
+      <p>Workers' comp, insurance defense, claims management. We don't need your world explained.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">🛡️</div>
+      <h4>AIGP Certified</h4>
+      <p>IAPP AI Governance Professional. Governance is the foundation, not an afterthought.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">🔧</div>
+      <h4>Battle-Tested</h4>
+      <p>Running in production today for healthcare and insurance clients. Proven, not prototyped.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">🤝</div>
+      <h4>We Use What We Sell</h4>
+      <p>Our own operations run on this platform. We trust it with our business — you can trust it with yours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-box reveal">
+    <h2>Ready to Level the<br>Playing Field?</h2>
+    <p style="color: var(--text-dim); font-size: 18px;">Four steps. No pressure. Prove the value before you commit.</p>
+
+    <div class="steps-grid">
+      <div class="cta-step">
+        <div class="num">1</div>
+        <h4>Demo</h4>
+        <p>30 minutes. Live system. Not slides.</p>
+      </div>
+      <div class="cta-step">
+        <div class="num">2</div>
+        <h4>Assessment</h4>
+        <p>Your infrastructure & requirements. Complimentary.</p>
+      </div>
+      <div class="cta-step">
+        <div class="num">3</div>
+        <h4>Pilot</h4>
+        <p>3–5 attorneys. 30 days. Full capability.</p>
+      </div>
+      <div class="cta-step">
+        <div class="num">4</div>
+        <h4>Rollout</h4>
+        <p>Firm-wide with collective intelligence.</p>
+      </div>
+    </div>
+
+    <div class="cta-contact">
+      <a href="#contact" style="pointer-events:none;">Request a demo to get started</a>
+    </div>
+
+    <div class="cta-tagline">Transformation, timed perfectly.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026. All rights reserved. Prepared exclusively for prospective clients.</p>
+</footer>
+
+<!-- SCROLL REVEAL -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
