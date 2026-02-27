@@ -32,8 +32,9 @@
     font-family: 'Inter', -apple-system, sans-serif;
     background: var(--navy);
     color: var(--text);
-    line-height: 1.7;
+    line-height: 1.8;
     overflow-x: hidden;
+    font-size: 18px;
   }
 
   /* ===== NAVIGATION ===== */
@@ -46,7 +47,7 @@
   }
   nav .logo { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
   nav .nav-links { display: flex; gap: 24px; }
-  nav .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+  nav .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.2s; }
   nav .nav-links a:hover { color: var(--gold); }
 
   /* ===== SECTIONS ===== */
@@ -78,7 +79,7 @@
   }
   .hero h1 .gold { color: var(--gold); }
   .hero .subtitle {
-    font-size: clamp(16px, 2vw, 20px); color: var(--text-dim);
+    font-size: clamp(18px, 2.5vw, 24px); color: var(--text-dim);
     max-width: 560px; line-height: 1.6; margin-bottom: 48px;
     animation: fadeUp 0.8s ease-out 0.2s both;
   }
@@ -108,7 +109,7 @@
     font-size: clamp(28px, 4vw, 44px); font-weight: 700;
     line-height: 1.2; margin-bottom: 16px;
   }
-  .section-subtitle { font-size: 17px; color: var(--text-dim); max-width: 600px; line-height: 1.6; margin-bottom: 48px; }
+  .section-subtitle { font-size: 20px; color: var(--text-dim); max-width: 650px; line-height: 1.7; margin-bottom: 48px; }
 
   /* ===== VERSUS TABLE ===== */
   .versus-section { padding-top: var(--section-gap); padding-bottom: var(--section-gap); }
@@ -117,7 +118,7 @@
   .versus-table th:first-child { background: var(--navy-mid); text-align: left; }
   .versus-table th:nth-child(2) { background: var(--red-soft); color: white; text-align: center; }
   .versus-table th:nth-child(3) { background: rgba(255,255,255,0.05); color: var(--text-dim); text-align: center; }
-  .versus-table td { padding: 14px 20px; border-bottom: 1px solid var(--card-border); font-size: 14px; }
+  .versus-table td { padding: 14px 20px; border-bottom: 1px solid var(--card-border); font-size: 17px; }
   .versus-table td:first-child { font-weight: 600; color: var(--text); background: var(--card-bg); }
   .versus-table td:nth-child(2) { color: var(--red-soft); font-weight: 500; text-align: center; background: rgba(192,57,43,0.05); }
   .versus-table td:nth-child(3) { color: var(--text-dim); text-align: center; }
@@ -130,7 +131,7 @@
   }
   .quote-block p {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 20px; font-style: italic; line-height: 1.6; color: var(--text);
+    font-size: 24px; font-style: italic; line-height: 1.6; color: var(--text);
   }
   .quote-block .attr { font-family: 'Inter', sans-serif; font-style: normal; font-size: 12px; color: var(--text-dim); margin-top: 12px; }
 
@@ -143,8 +144,8 @@
   }
   .value-card:hover { transform: translateY(-4px); border-color: var(--gold); }
   .value-card .icon { font-size: 28px; margin-bottom: 16px; }
-  .value-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
-  .value-card p { font-size: 14px; color: var(--text-body); line-height: 1.6; }
+  .value-card h3 { font-size: 21px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  .value-card p { font-size: 17px; color: var(--text-body); line-height: 1.7; }
 
   /* ===== ARCHITECTURE ===== */
   .arch-section { padding-top: var(--section-gap); }
@@ -170,8 +171,8 @@
     display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px;
   }
   .arch-layer .layer-items span {
-    background: rgba(255,255,255,0.06); padding: 6px 14px; border-radius: 6px;
-    font-size: 12px; color: var(--text-body); font-weight: 500;
+    background: rgba(255,255,255,0.06); padding: 8px 16px; border-radius: 6px;
+    font-size: 15px; color: var(--text-body); font-weight: 500;
   }
   .arch-connector { text-align: center; color: var(--gold); font-size: 24px; margin: -8px 0; }
   .arch-attorneys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -198,8 +199,8 @@
     background: linear-gradient(90deg, var(--gold), transparent);
   }
   .intel-card.full { grid-column: 1 / -1; }
-  .intel-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .intel-card p { font-size: 14px; color: var(--text-body); line-height: 1.6; }
+  .intel-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .intel-card p { font-size: 17px; color: var(--text-body); line-height: 1.7; }
 
   /* ===== COMPOUNDING ===== */
   .compound-section { padding-top: var(--section-gap); }
@@ -215,9 +216,9 @@
     background: var(--gold); border: 3px solid var(--navy);
   }
   .timeline-item .time { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
-  .timeline-item h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-  .timeline-item p { font-size: 14px; color: var(--text-dim); }
-  .timeline-item .competitor { font-size: 12px; color: rgba(192,57,43,0.7); margin-top: 4px; font-style: italic; }
+  .timeline-item h4 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .timeline-item p { font-size: 17px; color: var(--text-dim); }
+  .timeline-item .competitor { font-size: 15px; color: rgba(192,57,43,0.7); margin-top: 4px; font-style: italic; }
 
   /* ===== HUMAN ===== */
   .human-section { padding-top: var(--section-gap); }
@@ -227,8 +228,8 @@
     border-radius: 16px; padding: 28px;
   }
   .human-card .transformation { font-size: 13px; color: var(--green); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
-  .human-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .human-card p { font-size: 14px; color: var(--text-body); line-height: 1.6; }
+  .human-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .human-card p { font-size: 17px; color: var(--text-body); line-height: 1.7; }
   .human-card.full { grid-column: 1 / -1; }
 
   /* ===== FINANCIALS ===== */
@@ -247,13 +248,13 @@
   .pricing-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; margin: 32px 0; }
   .pricing-table th { background: var(--navy-light); padding: 14px 20px; font-size: 13px; font-weight: 600; text-align: center; letter-spacing: 0.5px; }
   .pricing-table th:first-child { text-align: left; }
-  .pricing-table td { padding: 14px 20px; border-bottom: 1px solid var(--card-border); text-align: center; font-size: 15px; }
+  .pricing-table td { padding: 14px 20px; border-bottom: 1px solid var(--card-border); text-align: center; font-size: 18px; }
   .pricing-table td:first-child { text-align: left; font-weight: 600; }
   .pricing-table .highlight-col { background: rgba(201,162,39,0.06); }
 
   .offset-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; margin: 24px 0; }
   .offset-table th { background: var(--navy-light); padding: 12px 16px; font-size: 12px; font-weight: 600; text-align: left; letter-spacing: 0.5px; }
-  .offset-table td { padding: 12px 16px; border-bottom: 1px solid var(--card-border); font-size: 13px; color: var(--text-body); }
+  .offset-table td { padding: 14px 18px; border-bottom: 1px solid var(--card-border); font-size: 16px; color: var(--text-body); }
 
   .net-cost-card {
     background: linear-gradient(135deg, rgba(39,174,96,0.1), rgba(201,162,39,0.1));
@@ -281,8 +282,8 @@
     border-radius: 10px; padding: 16px;
   }
   .security-item .check { color: var(--green); font-size: 18px; flex-shrink: 0; margin-top: 2px; }
-  .security-item .label { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
-  .security-item .desc { font-size: 12px; color: var(--text-dim); }
+  .security-item .label { font-size: 16px; font-weight: 600; margin-bottom: 2px; }
+  .security-item .desc { font-size: 15px; color: var(--text-dim); }
 
   /* ===== CTA ===== */
   .cta-section {
@@ -310,8 +311,8 @@
     display: flex; align-items: center; justify-content: center;
     margin: 0 auto 12px;
   }
-  .cta-step h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .cta-step p { font-size: 12px; color: var(--text-dim); }
+  .cta-step h4 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .cta-step p { font-size: 15px; color: var(--text-dim); }
   .cta-contact { margin-top: 40px; }
   .cta-contact a {
     color: var(--gold); text-decoration: none; font-size: 17px; font-weight: 600;
@@ -337,8 +338,8 @@
   }
   .why-card:hover { border-color: var(--gold); }
   .why-card .icon { font-size: 32px; margin-bottom: 16px; }
-  .why-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
-  .why-card p { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+  .why-card h4 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .why-card p { font-size: 15px; color: var(--text-dim); line-height: 1.6; }
 
   /* ===== ANIMATIONS ===== */
   @keyframes fadeUp {
